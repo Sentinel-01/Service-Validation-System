@@ -1,0 +1,37 @@
+package Database;
+
+/**
+ *
+ * @author Alonso
+ */
+public class ExecutorDef {
+    
+    private String name;
+    private String email;
+    
+    public String getName() {
+        return name;
+    }
+    
+    public String getEmail() {
+        return email;
+    }
+    
+    public ExecutorDef (String name, String email) {
+        super();
+        
+        assert name != null : "Precondition: name != null";
+        assert email != null : "Precondition: whenEnrolled != null";          
+        
+        this.name = name;
+        this.email = email;
+        
+        assert getName().equals(name) : "Postcondition : getNumber().equals(taskNumber)";
+        assert getEmail().equals(email) : "Postcondition : getTask().equals(taskName)";
+        
+    }
+    
+    public String toString() {
+        return "Name: " + name + "\tEmail: " + email;
+    }
+}
