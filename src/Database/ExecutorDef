@@ -8,6 +8,7 @@ public class ExecutorDef {
     
     private String name;
     private String email;
+    private String evidence;
     
     public String getName() {
         return name;
@@ -17,7 +18,11 @@ public class ExecutorDef {
         return email;
     }
     
+    public String getEvidence() {
+        return evidence;
+    }
+    
     public String toString() {
-        return "Name: " + name + "\tEmail: " + email;
+        return "Name: " + name + "\tEmail: " + email + "\tEvidence: " + evidence;
     }
 }
