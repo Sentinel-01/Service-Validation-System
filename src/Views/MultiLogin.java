@@ -2,6 +2,7 @@ package Views;
 
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,6 +27,10 @@ public class MultiLogin {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		ArrayList<Task> tasks = new ArrayList();
+		ArrayList<ExecutorDef> executors = new ArrayList();
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
