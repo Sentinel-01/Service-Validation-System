@@ -6,12 +6,12 @@ package Database;
  */
 public class Task {
     
-    private int taskNumber;
+    private Integer taskNumber;
     private String taskName;
     private String taskDescription;
-    private boolean status;
+    private Boolean status;
     
-    public int getNumber() {
+    public Integer getNumber() {
         return taskNumber;
     }
     
@@ -23,7 +23,7 @@ public class Task {
         return taskDescription;
     }
    
-    public boolean getStatus() {
+    public Boolean getStatus() {
         return status;
     }
     
