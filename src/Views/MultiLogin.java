@@ -7,9 +7,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+
+import database.DBConnection;
+
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.awt.event.ActionEvent;
 import javax.swing.JSeparator;
 import javax.swing.JComboBox;
@@ -21,11 +26,13 @@ public class MultiLogin {
 	private JFrame frame;
 	private JTextField textField;
 	private JPasswordField passwordField;
-
+	private static String message="";
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main (String[] args) throws Exception{
+		
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -48,6 +55,11 @@ public class MultiLogin {
 	/**
 	 * Initialize the contents of the frame.
 	 */
+	public static void successLogin(String msg)
+	{
+		message = msg;
+		return;
+	}
 	private void initialize() {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 500, 300);
@@ -71,26 +83,99 @@ public class MultiLogin {
 		frame.getContentPane().add(textField);
 		textField.setColumns(10);
 		
+		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(121, 110, 291, 26);
 		frame.getContentPane().add(passwordField);
+
+		JLabel lblUsertype = new JLabel("User Type");
+		lblUsertype.setBounds(20, 154, 89, 16);
+		frame.getContentPane().add(lblUsertype);
+		
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Administrator", "Executor", "Process Owner", "Approver"}));
+		comboBox.setEditable(true);
+		comboBox.setBackground(new Color(238, 238, 238));
+		comboBox.setBounds(121, 148, 168, 27);
+		frame.getContentPane().add(comboBox);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			String password = passwordField.getText();
 			String username = textField.getText();
-			
-			
-			
-			if (password.contains("king")&& username.contains("one")) {
-				passwordField.setText(null);
-				passwordField.setText(null);
+			String usertype=comboBox.getSelectedItem().toString();
+			DBConnection DB = new DBConnection();
+			if((!password.isEmpty())||(!username.isEmpty()))
+			{
+			try {
+				ResultSet rs = DB.getConnection(username,password,usertype);
+				if(rs.next()==false)
+				{
+					JFrame frmMultiLogin = new JFrame("Error");
+					JOptionPane.showMessageDialog(frmMultiLogin,  "Login failed. Please confirm username, password or usertype", "Login Systems",JOptionPane.ERROR_MESSAGE);
+				}
+				else
+				{
+				switch(usertype)
+				{
+				case "Administrator": 
+				{
+					java.awt.EventQueue.invokeLater(new Runnable() {
+
+				        public void run() {
+				        	new AdminViews().setVisible(true);
+				        }
+				    });
+					break;
+				}
+				case "Process Owner":
+				{
+					java.awt.EventQueue.invokeLater(new Runnable() {
+
+				        public void run() {
+				        	new ProcessOwn().setVisible(true);
+				        }
+				    });
+					break;
+				}
+				case "Executor":
+				{
+					java.awt.EventQueue.invokeLater(new Runnable() {
+
+				        public void run() {
+				        	new Executor().setVisible(true);
+				        }
+				    });
+					break;
+				
+				}
+				case "Approver":
+				{
+					java.awt.EventQueue.invokeLater(new Runnable() {
+
+				        public void run() {
+				        	new Approver().setVisible(true);
+				        }
+				    });
+					break;
+				}
+				default: System.out.println("Login failed! Please confirm username, password or usertype");
+				}
+				frame.setVisible(false); //you can't see me!
+				frame.dispose(); //Destroy the JFrame object
 			}
-			else {
-				JOptionPane.showMessageDialog(null,  "Invalid Login Details", "Login Error", JOptionPane.ERROR_MESSAGE);
-				passwordField.setText(null);
-				passwordField.setText(null);				}
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			}
+			else 
+			{
+
+				JFrame frmMultiLogin = new JFrame("Invalid");
+				JOptionPane.showMessageDialog(frmMultiLogin,  "Enter valid username or password", "Login Systems",JOptionPane.OK_OPTION);
+			}
 			}
 			
 		});
@@ -102,10 +187,7 @@ public class MultiLogin {
 			
 			public void actionPerformed(ActionEvent args) {
 				textField.setText(null);
-				passwordField.setText(null);
-
-						
-				
+				passwordField.setText(null);	
 			}
 		});
 		btnNewButton.setBounds(182, 222, 117, 29);
@@ -132,15 +214,6 @@ public class MultiLogin {
 		btnExit.setBounds(318, 222, 117, 29);
 		frame.getContentPane().add(btnExit);
 		
-		JLabel lblUsertype = new JLabel("User Type");
-		lblUsertype.setBounds(20, 154, 89, 16);
-		frame.getContentPane().add(lblUsertype);
-		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Administrator", "Executor", "Process Owner", "Approver"}));
-		comboBox.setEditable(true);
-		comboBox.setBackground(new Color(238, 238, 238));
-		comboBox.setBounds(121, 148, 168, 27);
-		frame.getContentPane().add(comboBox);
 	}
 }
+
