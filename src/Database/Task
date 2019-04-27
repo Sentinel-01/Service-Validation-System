@@ -6,39 +6,24 @@ package Database;
  */
 public class Task {
     
-    private int workNumber;
-    private String processOwner;
-    private String process;
-    private String description;
-    private String email;
-    private String link;
-    private boolean status;
+    private Integer taskNumber;
+    private String taskName;
+    private String taskDescription;
+    private Boolean status;
     
-    public int getNumber() {
-        return workNumber;
+    public Integer getNumber() {
+        return taskNumber;
     }
     
-    public String getOwner() {
-        return processOwner;
-    }
-    
-    public String getProcess() {
-        return process;
+    public String getTask() {
+        return taskName;
     }
     
     public String getDescription() {
-        return description;
+        return taskDescription;
     }
-    
-    public String getEmail() {
-        return email;
-    }
-    
-    public String getLink() {
-        return link;
-    }
-    
-    public boolean getStatus() {
+   
+    public Boolean getStatus() {
         return status;
     }
     
@@ -46,22 +31,33 @@ public class Task {
         this.status = status;
     }
     
+    public Task(Integer taskNumber, String taskName, String taskDescription, Boolean status) {
+        super();
+        
+        assert taskNumber != null : "Precondition: name != null";
+        assert taskName != null : "Precondition: whenEnrolled != null";
+        assert taskDescription != null : "Precondition: taskDescription != null";          
+        
+        this.taskNumber = taskNumber;
+        this.taskName = taskName;
+        this.taskDescription = taskDescription;
+        this.status = status;
+        
+        assert getNumber().equals(taskNumber) : "Postcondition : getNumber().equals(taskNumber)";
+        assert getTask().equals(taskName) : "Postcondition : getTask().equals(taskName)";
+        assert getDescription().equals(taskDescription) : "Postcondition : getDescription().equals(taskDescription)";
+        assert getStatus().equals(status) : "Postcondition : getStatus().equals(status)";
+    }
+    
     public String toString() {
-        if (status = true) return "Work Number: " + workNumber 
-                  + "\tProcess Owner: " + processOwner
-                  + "\tProcess: " + process
-                  + "\tDescription: " + description
-                  + "\tEmail: " + email
-                  + "\tURL: " + link
-                  + "\tProcess Owner: " + processOwner
+        if (status = true) return "Number: " + taskNumber 
+                  + "\tTask Name: " + taskName
+                  + "\tDescription: " + taskDescription
                   + "\tValidated? Yes";
-        else return "Work Number: " + workNumber 
-                  + "\tProcess Owner: " + processOwner
-                  + "\tProcess: " + process
-                  + "\tDescription: " + description
-                  + "\tEmail: " + email
-                  + "\tURL: " + link
-                  + "\tProcess Owner: " + processOwner 
+        else return "Number: " + taskNumber 
+                  + "\tTask Name: " + taskName
+                  + "\tDescription: " + taskDescription
                   + "\tValidated? No";
       }
 }
+
