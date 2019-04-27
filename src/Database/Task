@@ -6,38 +6,23 @@ package Database;
  */
 public class Task {
     
-    private int workNumber;
-    private String processOwner;
-    private String process;
-    private String description;
-    private String email;
-    private String link;
+    private int taskNumber;
+    private String taskName;
+    private String taskDescription;
     private boolean status;
     
     public int getNumber() {
-        return workNumber;
+        return taskNumber;
     }
     
-    public String getOwner() {
-        return processOwner;
-    }
-    
-    public String getProcess() {
-        return process;
+    public String getTask() {
+        return taskName;
     }
     
     public String getDescription() {
-        return description;
+        return taskDescription;
     }
-    
-    public String getEmail() {
-        return email;
-    }
-    
-    public String getLink() {
-        return link;
-    }
-    
+   
     public boolean getStatus() {
         return status;
     }
@@ -47,21 +32,13 @@ public class Task {
     }
     
     public String toString() {
-        if (status = true) return "Work Number: " + workNumber 
-                  + "\tProcess Owner: " + processOwner
-                  + "\tProcess: " + process
-                  + "\tDescription: " + description
-                  + "\tEmail: " + email
-                  + "\tURL: " + link
-                  + "\tProcess Owner: " + processOwner
+        if (status = true) return "Number: " + taskNumber 
+                  + "\tTask Name: " + taskName
+                  + "\tDescription: " + taskDescription
                   + "\tValidated? Yes";
-        else return "Work Number: " + workNumber 
-                  + "\tProcess Owner: " + processOwner
-                  + "\tProcess: " + process
-                  + "\tDescription: " + description
-                  + "\tEmail: " + email
-                  + "\tURL: " + link
-                  + "\tProcess Owner: " + processOwner 
+        else return "Number: " + taskNumber 
+                  + "\tTask Name: " + taskName
+                  + "\tDescription: " + taskDescription
                   + "\tValidated? No";
       }
 }
