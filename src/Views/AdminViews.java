@@ -6,21 +6,32 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import database.DBConnection;
+
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
 
 public class AdminViews extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_4;
-	private JTextField textField_5;
+	private JTextField TaskNumber;
+	private JTextField EvidenceType;
+	private JTextField TaskName;
+	private JTextField ExecutorName;
+	private JTextField ExecutorEmail;
 
 	/**
 	 * Launch the application.
@@ -43,16 +54,16 @@ public class AdminViews extends JFrame {
 	 */
 	public AdminViews() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 450, 422);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		textField = new JTextField();
-		textField.setBounds(120, 66, 272, 26);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		TaskNumber = new JTextField();
+		TaskNumber.setBounds(120, 66, 272, 26);
+		contentPane.add(TaskNumber);
+		TaskNumber.setColumns(10);
 		
 		JTextPane txtpnServiceValidationSystem = new JTextPane();
 		txtpnServiceValidationSystem.setText("SERVICE VALIDATION SYSTEM");
@@ -83,43 +94,68 @@ public class AdminViews extends JFrame {
 		lblEvidenceType.setBounds(25, 252, 97, 16);
 		contentPane.add(lblEvidenceType);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(123, 246, 272, 26);
-		contentPane.add(textField_1);
+		EvidenceType = new JTextField();
+		EvidenceType.setColumns(10);
+		EvidenceType.setBounds(123, 246, 272, 26);
+		contentPane.add(EvidenceType);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(120, 104, 272, 26);
-		contentPane.add(textField_2);
+		TaskName = new JTextField();
+		TaskName.setColumns(10);
+		TaskName.setBounds(120, 104, 272, 26);
+		contentPane.add(TaskName);
 		
 		JLabel lblTaskDescription = new JLabel("Task Description");
 		lblTaskDescription.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		lblTaskDescription.setBounds(25, 136, 108, 16);
 		contentPane.add(lblTaskDescription);
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBounds(125, 135, 256, 32);
-		contentPane.add(textArea);
+		JTextArea TaskDescription = new JTextArea();
+		TaskDescription.setBounds(125, 135, 256, 32);
+		contentPane.add(TaskDescription);
 		
 		JLabel lblProcessOwner = new JLabel("Executor");
 		lblProcessOwner.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		lblProcessOwner.setBounds(29, 190, 97, 16);
 		contentPane.add(lblProcessOwner);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(120, 183, 272, 26);
-		contentPane.add(textField_4);
+		ExecutorName = new JTextField();
+		ExecutorName.setColumns(10);
+		ExecutorName.setBounds(120, 183, 272, 26);
+		contentPane.add(ExecutorName);
 		
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		lblEmail.setBounds(25, 224, 97, 16);
 		contentPane.add(lblEmail);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
-		textField_5.setBounds(120, 216, 272, 26);
-		contentPane.add(textField_5);
+		ExecutorEmail = new JTextField();
+		ExecutorEmail.setColumns(10);
+		ExecutorEmail.setBounds(120, 216, 272, 26);
+		contentPane.add(ExecutorEmail);
+		
+		JButton btnSubmit = new JButton("Submit");
+		btnSubmit.setBounds(120, 332, 89, 23);
+		contentPane.add(btnSubmit);
+		DBConnection DB = new DBConnection();
+		btnSubmit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String taskNumber,taskName,taskDescription,executor,email,evidencetype;
+				taskNumber= TaskNumber.getText().toString();
+				taskName=TaskName.getText().toString();
+				taskDescription=TaskDescription.getText().toString();
+				
+				executor=ExecutorName.getText().toString();
+				email=ExecutorEmail.getText().toString();
+				evidencetype=EvidenceType.getText().toString();
+				ArrayList<AdminViews> tasks=new ArrayList<AdminViews>();
+				//String[] tasknames = 
+				try {
+					ResultSet s=DB.getAdminstratorConnection(taskNumber,taskName,taskDescription);
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
 	}
 }

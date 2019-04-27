@@ -2,11 +2,14 @@ package Views;
 
 import java.awt.Component;
 import java.awt.EventQueue;
+import java.awt.Window;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 import database.DBConnection;
 
@@ -21,7 +24,7 @@ import javax.swing.JComboBox;
 import java.awt.Color;
 import javax.swing.DefaultComboBoxModel;
 
-public class MultiLogin {
+public class MultiLogin extends JFrame{
 
 	private JFrame frame;
 	private JTextField textField;
@@ -30,14 +33,12 @@ public class MultiLogin {
 	/**
 	 * Launch the application.
 	 */
-	public static void main (String[] args) throws Exception{
-		
-		
+	public static void main (String[] args){
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
 					MultiLogin window = new MultiLogin();
-					window.frame.setVisible(true);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,59 +46,52 @@ public class MultiLogin {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public MultiLogin() {
-		initialize();
-	}
-
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	public static void successLogin(String msg)
 	{
 		message = msg;
 		return;
 	}
-	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 500, 300);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+	private JPanel contentPane2;
+	MultiLogin() {
+		setBounds(100, 100, 500, 300);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		contentPane2 = new JPanel();
+		contentPane2.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane2);
+		contentPane2.setLayout(null);
 		
 		JLabel lblLoginSystem = new JLabel("Login System");
 		lblLoginSystem.setBounds(200, 20, 122, 16);
-		frame.getContentPane().add(lblLoginSystem);
+		contentPane2.add(lblLoginSystem);
 		
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setBounds(20, 72, 89, 16);
-		frame.getContentPane().add(lblUsername);
+		contentPane2.add(lblUsername);
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setBounds(20, 115, 61, 16);
-		frame.getContentPane().add(lblPassword);
+		contentPane2.add(lblPassword);
 		
 		textField = new JTextField();
 		textField.setBounds(121, 72, 289, 26);
-		frame.getContentPane().add(textField);
+		contentPane2.add(textField);
 		textField.setColumns(10);
 		
 		
 		passwordField = new JPasswordField();
 		passwordField.setBounds(121, 110, 291, 26);
-		frame.getContentPane().add(passwordField);
+		contentPane2.add(passwordField);
 
 		JLabel lblUsertype = new JLabel("User Type");
 		lblUsertype.setBounds(20, 154, 89, 16);
-		frame.getContentPane().add(lblUsertype);
+		contentPane2.add(lblUsertype);
 		
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Administrator", "Executor", "Process Owner", "Approver"}));
 		comboBox.setEditable(true);
 		comboBox.setBackground(new Color(238, 238, 238));
 		comboBox.setBounds(121, 148, 168, 27);
-		frame.getContentPane().add(comboBox);
+		contentPane2.add(comboBox);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
@@ -134,7 +128,7 @@ public class MultiLogin {
 					java.awt.EventQueue.invokeLater(new Runnable() {
 
 				        public void run() {
-				        	new ProcessOwn().setVisible(true);
+				        	new ProcessOwnView().setVisible(true);
 				        }
 				    });
 					break;
@@ -144,7 +138,7 @@ public class MultiLogin {
 					java.awt.EventQueue.invokeLater(new Runnable() {
 
 				        public void run() {
-				        	new Executor().setVisible(true);
+				        	new ExecutorView().setVisible(true);
 				        }
 				    });
 					break;
@@ -155,15 +149,15 @@ public class MultiLogin {
 					java.awt.EventQueue.invokeLater(new Runnable() {
 
 				        public void run() {
-				        	new Approver().setVisible(true);
+				        	new ApproverView().setVisible(true);
 				        }
 				    });
 					break;
 				}
 				default: System.out.println("Login failed! Please confirm username, password or usertype");
 				}
-				frame.setVisible(false); //you can't see me!
-				frame.dispose(); //Destroy the JFrame object
+				setVisible(false); //you can't see me!
+				dispose(); //Destroy the JFrame object
 			}
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -180,7 +174,7 @@ public class MultiLogin {
 			
 		});
 		btnLogin.setBounds(32, 222, 117, 29);
-		frame.getContentPane().add(btnLogin);
+		contentPane2.add(btnLogin);
 		
 		JButton btnNewButton = new JButton("Reset");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -191,15 +185,15 @@ public class MultiLogin {
 			}
 		});
 		btnNewButton.setBounds(182, 222, 117, 29);
-		frame.getContentPane().add(btnNewButton);
+		contentPane2.add(btnNewButton);
 		
 		JSeparator separator = new JSeparator();
 		separator.setBounds(17, 192, 438, 12);
-		frame.getContentPane().add(separator);
+		contentPane2.add(separator);
 		
 		JSeparator separator_1 = new JSeparator();
 		separator_1.setBounds(17, 48, 438, 12);
-		frame.getContentPane().add(separator_1);
+		contentPane2.add(separator_1);
 		
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
@@ -212,7 +206,7 @@ public class MultiLogin {
 			}
 		});
 		btnExit.setBounds(318, 222, 117, 29);
-		frame.getContentPane().add(btnExit);
+		contentPane2.add(btnExit);
 		
 	}
 }
