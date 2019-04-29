@@ -76,7 +76,9 @@ public class ApproverView extends JFrame {
 		});
 		btnSubmit.setBounds(304, 204, 94, 29);
 		contentPane.add(btnSubmit);
-		
+		/**
+	 	* Approver will have the option of either approving or rejecting a task.
+	 	*/
 		JCheckBox approve = new JCheckBox("Approve");
 		approve.setBounds(123, 207, 93, 23);
 		contentPane.add(approve);
@@ -118,6 +120,9 @@ public class ApproverView extends JFrame {
 		JComboBox task_list = new JComboBox();
 		task_list.setBounds(123, 61, 275, 20);
 		contentPane.add(task_list);
+		/**
+		* Initiate preprocess.
+	 	*/
 		Preprocess getdata =new Preprocess();
 		 ArrayList<Preprocess> result=getdata.getTask();
 		 for(Preprocess p: result)
@@ -125,7 +130,9 @@ public class ApproverView extends JFrame {
 			 task_list.addItem(p.getTaskType());
 			 //+"   "+p.getTaskExecutor()+"  "+p.getEvidence()
 		 }
-		
+		/**
+	 	* Get info from executor.
+	 	*/
 		task_list.addItemListener(new ItemListener() {
 			
 			@Override
