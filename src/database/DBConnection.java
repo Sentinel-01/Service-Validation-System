@@ -7,6 +7,14 @@ import javax.swing.JOptionPane;
 
 import Views.MultiLogin;
 
+/**
+ *  Establish a connection to the MySQL server
+ *  Update all existing values made by the user as needed
+ *  Get all existing usernames and passwords in server (getConnection)
+ *  Provide admin with special connection privileges (getAdministratorConnection)
+ *  Provide process owner with special connection privileges (getProcessOwnerConnection)
+ *  Provide executor with special connection privileges (getExecutorConnection)
+ */
 public class DBConnection {
 	String driver = "com.mysql.jdbc.Driver";
 	String url = "jdbc:mysql://localhost:3306/";
