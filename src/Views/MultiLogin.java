@@ -52,6 +52,9 @@ public class MultiLogin extends JFrame{
 		return;
 	}
 	private JPanel contentPane2;
+	/**
+	 *  Initialize the frame.
+	 */
 	MultiLogin() {
 		setBounds(100, 100, 500, 300);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -93,6 +96,9 @@ public class MultiLogin extends JFrame{
 		comboBox.setBounds(121, 148, 168, 27);
 		contentPane2.add(comboBox);
 		
+		/**
+		 *  Confirm user credentials, depending on user type.
+		 */
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -195,6 +201,9 @@ public class MultiLogin extends JFrame{
 		separator_1.setBounds(17, 48, 438, 12);
 		contentPane2.add(separator_1);
 		
+		/**
+ 		*  Exit the application when finished.
+		*/
 		JButton btnExit = new JButton("Exit");
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
