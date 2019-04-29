@@ -2,9 +2,15 @@ package Views;
 
 import java.util.ArrayList;
 
+/**
+ *  Initialize preprocess
+ */
 public class Preprocess {
 static ArrayList<Preprocess> taskProcess=new ArrayList<Preprocess>(); 
 private static String[] arr=new String[3];
+	/**
+	*  Define preprocess values
+	*/
 	public void setTask(String task_type,String task_executor,String evidence) {
 		
 		taskProcess.add(new Preprocess(task_type,task_executor,evidence));
