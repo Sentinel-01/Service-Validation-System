@@ -91,6 +91,9 @@ public class ProcessOwnView extends JFrame {
 		task_executor.setBounds(239, 91, 180, 27);
 		contentPane.add(task_executor);
 		
+		/**
+ 		*  Create another task process if the user desires.
+ 		*/
 		JButton btnAddAnother = new JButton("Add Another");
 		btnAddAnother.setBounds(23, 199, 117, 29);
 		contentPane.add(btnAddAnother);
@@ -124,6 +127,10 @@ public class ProcessOwnView extends JFrame {
 			p.setTask(task_type.getSelectedItem().toString(),task_executor.getSelectedItem().toString(),evidence.getSelectedItem().toString());
 			}
 		});
+		
+		/**
+ 		*  Tells application that user has finished adding/selecting processes.
+ 		*/
 		JButton btnComplete = new JButton("Complete");
 		btnComplete.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
